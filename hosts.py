@@ -13,6 +13,8 @@ x = base | {
     "alacritty.toml": "~/.config/alacritty/",
     "sxhkdrc": "~/.config/sxhkd/",
     "bspwmrc": "~/.config/bspwm/",
+    ".xinitrc": "~/",
+    "poweroff.desktop": "~/.local/share/applications/",
     "picom.conf": "~/.config/picom/",
     "polybar-one-batt.ini": "~/.config/polybar/config.ini",
 }
@@ -22,7 +24,7 @@ t480.pop("polybar-one-batt.ini")
 
 allowed = {"X": x, "Base (no x)": base, "T480": t480}
 
-requirements = ["feh", "bspwm", "sxhkd", "polybar", "neovim", "alacritty", "picom", "rofi", "zsh"]
+requirements = ["feh", "bspwm", "sxhkd", "polybar", "neovim", "alacritty", "picom", "rofi", "zsh", "xserver-xorg", "xinit"]
 
 def ask_user(allowed):
     print("Available configs:")
