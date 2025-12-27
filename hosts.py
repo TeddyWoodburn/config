@@ -63,8 +63,8 @@ def install(name, destination, dry_run):
         print("Change: ", source_path, "->", dest_path)
 
     if not dry_run:
-        subprocess.run(("mkdir", "-p", str(destination.parent))
-        subprocess.run(("cp", str(source), str(destination))
+        subprocess.run(("mkdir", "-p", str(destination.parent)))
+        subprocess.run(("cp", str(source), str(destination)))
 
 dry_run = input("Dry run? [Y/n]").strip().lower()
 
