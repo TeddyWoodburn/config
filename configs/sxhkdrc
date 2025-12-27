@@ -1,0 +1,47 @@
+super + Tab
+    bspc node -f next.local.!hidden.window
+
+super + shift + Tab
+    bspc node -f prev.local.!hidden.window
+
+alt + super + r
+    bspc wm -r
+
+alt + Escape
+    pkill -USR1 -x sxhkd
+
+super + f
+    bspc node -t fullscreen; polybar-msg cmd hide
+
+super + p
+    polybar-msg cmd show
+
+alt + {h,j,k,l}
+    bspc node -s {west,south,north,east}
+
+super + q
+    bspc node -c
+
+super + space
+    rofi -show drun
+
+super + Return
+    alacritty
+
+super + j
+    bspc desktop -f prev
+
+super + k
+    bspc desktop -f next
+
+super + shift + j
+    id=$(bspc query -N -n focused); bspc node -d prev; bspc desktop -f prev; bspc node -f $id
+
+super + shift + k
+    id=$(bspc query -N -n focused); bspc node -d next; bspc desktop -f next; bspc node -f $id
+
+XF86MonBrightnessUp
+    brightnessctl set 10%+
+
+XF86MonBrightnessDown
+    brightnessctl set 10%-

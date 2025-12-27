@@ -1,0 +1,31 @@
+[general]
+working_directory = "/home/td/Documents/Code"
+
+[colors.primary]
+background = "0x000000"
+foreground = "0xffffff"
+
+[colors.normal]
+black = "#000000"
+red = "#CC3333"
+green = "#00FF00"
+yellow = "#FFFF33"
+blue = "#00CCFF"
+magenta = "#FF00FF"
+cyan = "#00FFFF"
+white = "#FFFFFF"
+
+[window]
+decorations = "None"
+startup_mode = "Maximized"
+opacity = 1.0
+
+[window.padding]
+x = 10
+y = 10
+
+[scrolling]
+history = 100000
+
+[font]
+size = 12
