@@ -54,8 +54,11 @@ def install(name, destination, dry_run):
     with open(source_path) as f:
         source_lines = f.read().splitlines()
 
-    with open(dest_path) as f:
-        dest_lines = f.read().splitlines()
+    if dest_path.exists():
+        with open(dest_path) as f:
+            dest_lines = f.read().splitlines()
+    else:
+        dest_lines = []
 
     if source_lines == dest_lines:
         print("No change: ", source_path, "->", dest_path)
