@@ -16,7 +16,7 @@ x = base | {
     ".xinitrc": "~/",
     "poweroff.desktop": "~/.local/share/applications/",
     "picom.conf": "~/.config/picom/",
-    "polybar-one-batt.ini": "~/.config/polybar/config.ini",
+    "polybar-parts": "~/.config/polybar/config.ini",
 }
 
 t480 = x | {"polybar-two-batt.ini": "~/.config/polybar/config.ini"}
@@ -26,10 +26,24 @@ allowed = {"X": x, "Base (no x)": base, "T480": t480}
 
 requirements = ["feh", "bspwm", "sxhkd", "polybar", "neovim", "alacritty", "picom", "rofi", "zsh", "xserver-xorg", "xinit", "firefox-esr", "python3-pip", "python3-venv", "zeal"]
 
-def get_batteries():
+def render_polybar():
     power_supps = Path("/sys/class/power_supply").iterdir()
-    return [p.name for p in power_supps if p.name.startswith("BAT")]
+    batteries = [p.name for p in power_supps if p.name.startswith("BAT")]
 
+    start = open("configs/polybar-parts/start").read()
+    mid = open("configs/polybar-parts/mid").read()
+    end = open("configs/polybar-parts/end").read()
+
+    rendered = start.strip()
+    rendered += "\nmodules-right = " + " ".join(b.lower() for b in batteries)
+    rendered += mid
+    for batt in batteries:
+        rendered += f"\n[module/{batt.lower()}]"
+        rendered += "\ninherit = module/battery"
+        rendered += "\nbattery = " + batt + "\n"
+    rendered += end
+
+    return rendered
 
 
 def ask_user(allowed):
@@ -58,9 +72,13 @@ def install(name, destination, dry_run):
         dest_path /= name
 
     source_path = Path("configs") / name
-
-    with open(source_path) as f:
-        source_lines = f.read().splitlines()
+    
+    if name == "polybar-parts":
+        rendered = render_polybar()
+        source_lines = rendered.splitlines()
+    else:
+        with openwith open(source_path) as f:
+            source_lines = f.read().splitlines()
 
     if dest_path.exists():
         with open(dest_path) as f:
@@ -75,7 +93,11 @@ def install(name, destination, dry_run):
 
     if not dry_run:
         subprocess.run(("mkdir", "-p", str(dest_path.parent)))
-        subprocess.run(("cp", str(source_path), str(dest_path)))
+        if rendered:
+            with open(dest_path, "w") as f:
+                f.write(rendered)
+        else:
+            subprocess.run(("cp", str(source_path), str(dest_path)))
 
 dry_run = input("Dry run? [Y/n]").strip().lower()
 
