@@ -21,7 +21,7 @@ x = base | {
 
 allowed = {"X": x, "Base (no x)": base}
 
-requirements = ["feh", "bspwm", "sxhkd", "polybar", "neovim", "alacritty", "picom", "rofi", "zsh", "xserver-xorg", "xinit", "firefox-esr", "python3-pip", "python3-venv", "zeal", "brightnessctl"]
+requirements = ["feh", "bspwm", "sxhkd", "polybar", "neovim", "alacritty", "picom", "rofi", "zsh", "xserver-xorg", "xinit", "firefox-esr", "python3-pip", "python3-venv", "zeal", "brightnessctl", "syncthing"]
 
 def render_polybar():
     power_supps = Path("/sys/class/power_supply").iterdir()
@@ -108,10 +108,11 @@ chosen = ask_user(allowed)
 
 for name, dest in chosen.items():
     install(name, dest, dry_run)
-    
-subprocess.run("rm -rf ~/.local/share/Zeal/Zeal/docsets", shell=True)
-subprocess.run("mkdir -p ~/Documents/zeal-docset", shell=True)
-subprocess.run("ln -s ~/Documents/zeal-docset ~/.local/share/Zeal/Zeal/docsets", shell=True) # shell expands the home dir, this doesn't come from an input so this is easier than Path.expanduser()
+
+if not dry_run:
+    subprocess.run("rm -rf ~/.local/share/Zeal/Zeal/docsets", shell=True)
+    subprocess.run("mkdir -p ~/Documents/zeal-docset", shell=True)
+    subprocess.run("ln -s ~/Documents/zeal-docset ~/.local/share/Zeal/Zeal/docsets", shell=True) # shell expands the home dir, this doesn't come from an input so this is easier than Path.expanduser()
 
 subprocess.run(("sudo", "apt-get", "update"))
 
@@ -123,5 +124,8 @@ else:
     apt_install.insert(3, "-y")
 
 subprocess.run(apt_install)
+
+if not dry_run:
+    subprocess.run(("sudo", "systemctl", "enable", "--now", "syncthing@td.service"))
 
 
