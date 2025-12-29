@@ -19,10 +19,7 @@ x = base | {
     "polybar-parts": "~/.config/polybar/config.ini",
 }
 
-t480 = x | {"polybar-two-batt.ini": "~/.config/polybar/config.ini"}
-t480.pop("polybar-one-batt.ini")
-
-allowed = {"X": x, "Base (no x)": base, "T480": t480}
+allowed = {"X": x, "Base (no x)": base}
 
 requirements = ["feh", "bspwm", "sxhkd", "polybar", "neovim", "alacritty", "picom", "rofi", "zsh", "xserver-xorg", "xinit", "firefox-esr", "python3-pip", "python3-venv", "zeal"]
 
