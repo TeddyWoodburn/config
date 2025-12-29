@@ -109,8 +109,8 @@ chosen = ask_user(allowed)
 for name, dest in chosen.items():
     install(name, dest, dry_run)
 
-subprocess.run(("mkdir", "-p", "~/Documents/zeal-docsets"))
-subprocess.run(("ln", "-s", "~/Documents/zeal-docsets", "~/.local/share/Zeal/Zeal/docsets"))
+subprocess.run("mkdir -p ~/Documents/zeal-docsets", shell=True)
+subprocess.run("ln -s ~/Documents/zeal-docsets ~/.local/share/Zeal/Zeal/docsets", shell=True) # shell expands the home dir, this doesn't come from an input so this is easier than Path.expanduser()
 
 subprocess.run(("sudo", "apt-get", "update"))
 
