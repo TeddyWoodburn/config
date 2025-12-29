@@ -21,7 +21,7 @@ x = base | {
 
 allowed = {"X": x, "Base (no x)": base}
 
-requirements = ["feh", "bspwm", "sxhkd", "polybar", "neovim", "alacritty", "picom", "rofi", "zsh", "xserver-xorg", "xinit", "firefox-esr", "python3-pip", "python3-venv", "zeal"]
+requirements = ["feh", "bspwm", "sxhkd", "polybar", "neovim", "alacritty", "picom", "rofi", "zsh", "xserver-xorg", "xinit", "firefox-esr", "python3-pip", "python3-venv", "zeal", "brightnessctl"]
 
 def render_polybar():
     power_supps = Path("/sys/class/power_supply").iterdir()
@@ -108,6 +108,9 @@ chosen = ask_user(allowed)
 
 for name, dest in chosen.items():
     install(name, dest, dry_run)
+
+subprocess.run(("mkdir", "-p", "~/Documents/zeal-docsets"))
+subprocess.run(("ln", "-s", "~/Documents/zeal-docsets", "~/.local/share/Zeal/Zeal/docsets"))
 
 subprocess.run(("sudo", "apt-get", "update"))
 
