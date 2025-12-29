@@ -110,8 +110,8 @@ for name, dest in chosen.items():
     install(name, dest, dry_run)
     
 subprocess.run("rm -rf ~/.local/share/Zeal/Zeal/docsets", shell=True)
-subprocess.run("mkdir -p ~/Documents/zeal-docsets", shell=True)
-subprocess.run("ln -s ~/Documents/zeal-docsets ~/.local/share/Zeal/Zeal/docsets", shell=True) # shell expands the home dir, this doesn't come from an input so this is easier than Path.expanduser()
+subprocess.run("mkdir -p ~/Documents/zeal-docset", shell=True)
+subprocess.run("ln -s ~/Documents/zeal-docset ~/.local/share/Zeal/Zeal/docsets", shell=True) # shell expands the home dir, this doesn't come from an input so this is easier than Path.expanduser()
 
 subprocess.run(("sudo", "apt-get", "update"))
 
