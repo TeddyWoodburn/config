@@ -77,7 +77,7 @@ def install(name, destination, dry_run):
         rendered = render_polybar()
         source_lines = rendered.splitlines()
     else:
-        with openwith open(source_path) as f:
+        with open(source_path) as f:
             source_lines = f.read().splitlines()
 
     if dest_path.exists():
