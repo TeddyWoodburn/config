@@ -24,7 +24,13 @@ t480.pop("polybar-one-batt.ini")
 
 allowed = {"X": x, "Base (no x)": base, "T480": t480}
 
-requirements = ["feh", "bspwm", "sxhkd", "polybar", "neovim", "alacritty", "picom", "rofi", "zsh", "xserver-xorg", "xinit"]
+requirements = ["feh", "bspwm", "sxhkd", "polybar", "neovim", "alacritty", "picom", "rofi", "zsh", "xserver-xorg", "xinit", "firefox-esr", "python3-pip", "python3-venv", "zeal"]
+
+def get_batteries():
+    power_supps = Path("/sys/class/power_supply").iterdir()
+    return [p.name for p in power_supps if p.name.startswith("BAT")]
+
+
 
 def ask_user(allowed):
     print("Available configs:")
