@@ -1,1 +1,23 @@
 
+[module/bspwm]
+type = internal/bspwm
+
+label-focused-background = #ff404050
+label-focused-foreground = #ffffff
+format = <label-state>
+
+label-focused = " %name% "
+label-occupied = " %name% "
+label-empty = " %name% "
+label-urgent = " %name% "
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 100
+poll-interval = 1
+
+label-charging = "%percentage%% (+%consumption% W) "
+label-discharging = "%percentage%% (-%consumption% W) "
+label-full = "100% "
