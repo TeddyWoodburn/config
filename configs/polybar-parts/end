@@ -1,0 +1,11 @@
+
+[module/wlan]
+type=internal/network
+interface-type=wireless
+label-connected = "%{A1:nm-connection-editor:}%essid%%{A} "
+label-disconnected = "no wifi"
+
+[module/time]
+type = internal/date
+interval = 1
+date = "%H:%M:%S"
