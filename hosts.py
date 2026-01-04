@@ -127,5 +127,6 @@ subprocess.run(apt_install)
 
 if not dry_run:
     subprocess.run(("sudo", "systemctl", "enable", "--now", "syncthing@td.service"))
+    subprocess.run(("/home/td/Documents/config_private"))
 
 
