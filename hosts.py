@@ -21,7 +21,7 @@ x = base | {
 
 allowed = {"X": x, "Base (no x)": base}
 
-requirements = ["feh", "bspwm", "sxhkd", "polybar", "neovim", "alacritty", "picom", "rofi", "zsh", "xserver-xorg", "xinit", "firefox-esr", "python3-pip", "python3-venv", "zeal", "brightnessctl", "syncthing"]
+requirements = ["feh", "bspwm", "sxhkd", "polybar", "neovim", "alacritty", "picom", "rofi", "zsh", "xserver-xorg", "xinit", "firefox-esr", "python3-pip", "python3-venv", "zeal", "brightnessctl", "syncthing", "blueman", "snapper", "bluez-alsa-utils"]
 
 def render_polybar():
     power_supps = Path("/sys/class/power_supply").iterdir()
